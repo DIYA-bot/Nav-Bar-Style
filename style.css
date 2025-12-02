@@ -1,0 +1,97 @@
+ *,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  background-color: #e7dfdf;
+  color: #ffffff;
+  min-height: 1vh;
+  display: grid;
+  place-items: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  outline: none;
+
+  &:focus-visible {
+    outline-style: solid;
+    outline-color: hsl(0 0% 100% / 0.2);
+    outline-width: 2px;
+  }
+}
+
+.toggle-buttons {
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: #000;
+}
+
+.toggle-buttons__item {
+  display: grid;
+  position: relative;
+}
+
+.toggle-buttons__button,
+.toggle-buttons__active {
+  grid-area: 1 / 1;
+}
+
+.toggle-buttons__button {
+  padding: 0.5rem 1rem;
+  position: relative;
+  z-index: 1;
+  border-radius: 0.25rem;
+  view-transition-class: toggle-button;
+}
+
+.toggle-buttons__active {
+  background-color: #f9178f;
+  border-radius: 0.5rem;
+  view-transition-name: active-toggle-button;
+
+  .toggle-buttons__item--home & {
+    background-color: #63cff9;
+  }
+
+  .toggle-buttons__item--features & {
+    background-color: #3acf8c;
+  }
+
+  .toggle-buttons__item--about & {
+    background-color: #f50b0b;
+  }
+
+  .toggle-buttons__item--contact & {
+    background-color: #bed01b;
+  }
+}
+
+::view-transition-group(.toggle-button) {
+  z-index: 2;
+}
+
+::view-transition-group(active-toggle-button) {
+  z-index: 1;
+  animation-timing-function: cubic-bezier(0.8, -0.4, 0.5, 1);
+  animation-duration: 0.25s;
+}
+
+::view-transition-old(active-toggle-button),
+::view-transition-new(active-toggle-button) {
+  height: 100%;
+}
